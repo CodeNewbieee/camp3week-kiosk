@@ -278,16 +278,16 @@ class ShackBurger {
     }
     }
 
-    private fun addMenu(burger: Menu) {
-        println("${burger.description}")
+    private fun addMenu(menu: Menu) {
+        println(menu.description)
         println("위 메뉴를 장바구니에 추가하시겠습니까?")
         println("1. 확인      2. 취소")
         while (true) {
             val select = readln().toInt()
             when (select) {
                 1 -> {
-                    menuList.add(burger)
-                    println("${burger.name} 가 장바구니에 추가되었습니다.")
+                    menuList.add(menu)
+                    println("${menu.name} 가 장바구니에 추가되었습니다.")
                     break
                 }
 
