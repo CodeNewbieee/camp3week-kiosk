@@ -1,6 +1,6 @@
 package com.example.kioskapplication
 
-class Burger(val name: String, val price: Int) {
+open class Burger(val name: String, val price: Int) {
 
 
 
