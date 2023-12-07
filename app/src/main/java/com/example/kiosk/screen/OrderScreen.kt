@@ -8,9 +8,7 @@ class OrderScreen : Screen(){
         isShoppingCartEmpty = MyKiosk.shoppingCart.isEmpty()
 
         val input = getInput()
-        if(input == "b") return "false"
-        if(input == "p") return "true"
-        return ""
+        return input
     }
 
     override fun getInput():String{
@@ -39,6 +37,6 @@ class OrderScreen : Screen(){
 
     private fun printCostSum(){
         var costSum = MyKiosk.shoppingCart.getCostSum()
-        println("-----가격 총 합: ${costSum}")
+        println("-----가격 총 합: ${costSum}원")
     }
 }

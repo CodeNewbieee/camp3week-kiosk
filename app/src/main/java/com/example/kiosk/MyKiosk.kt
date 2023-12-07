@@ -5,7 +5,9 @@ import com.example.kiosk.menu.MyMenu
 import com.example.kiosk.screen.FirstScreen
 import com.example.kiosk.screen.MainScreen
 import com.example.kiosk.screen.OrderCompleteScreen
+import com.example.kiosk.screen.OrderPaymentScreen
 import com.example.kiosk.screen.OrderScreen
+import com.example.kiosk.screen.PaymentManager
 import com.example.kiosk.screen.SelectMenuScreen
 import com.example.kiosk.screen.ShoppingCartScreen
 import com.example.kiosk.screen.TakeOutScreen
@@ -19,6 +21,7 @@ class MyKiosk private constructor(){
     private val selectMenuScreen = SelectMenuScreen()
     private val shoppingCartScreen = ShoppingCartScreen()
     private val orderScreen = OrderScreen()
+    private val orderPaymentScreen = OrderPaymentScreen()
     private val orderCompleteScreen = OrderCompleteScreen()
 
     companion object{
@@ -33,6 +36,7 @@ class MyKiosk private constructor(){
         //모든 메뉴 정보
         val myMenu = MyMenu()
         val shoppingCart = MenuItemCollection()
+        val paymentManager = PaymentManager()
         var isTakeOut:Boolean = false
     }
 
@@ -61,8 +65,16 @@ class MyKiosk private constructor(){
                         "c" -> shoppingCartScreen.run() //4. 장바구니 화면
                         "o" -> {
                             //5. 주문하기 화면
-                            val isOrderComplete = orderScreen.run()
-                            if(isOrderComplete == "true") break@mainLoop //6. 주문 완료 화면
+                            val orderResult = orderScreen.run()
+                            when(orderResult) {
+                                "b" -> continue@mainLoop//2. 메인 화면
+                                "p" ->{
+                                    //주문 결제 화면
+                                    val orderPaymentResult = orderPaymentScreen.run()
+                                    if(orderPaymentResult == "true") break@mainLoop //6. 주문 완료 화면
+                                    else continue@mainLoop //2. 메인 화면 (결제 실패, not reached)
+                                }
+                            }
                         }
                         "b" -> continue@takeOutLoop //1. 먹고가기/포장하기 화면
                         "q" -> continue@firstLoop //0. 첫 화면

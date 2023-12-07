@@ -40,6 +40,6 @@ class ShoppingCartScreen: Screen() {
 
     private fun printCostSum(){
         var costSum = MyKiosk.shoppingCart.getCostSum()
-        println("-----가격 총 합: ${costSum}")
+        println("-----가격 총 합: ${costSum}원")
     }
 }
