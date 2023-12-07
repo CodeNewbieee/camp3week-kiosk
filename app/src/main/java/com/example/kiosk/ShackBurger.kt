@@ -1,16 +1,25 @@
 package com.example.kiosk
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 import java.text.DecimalFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.ArrayList
+import kotlin.concurrent.thread
+import kotlin.concurrent.timer
 
 class ShackBurger {
     private val menuList = ArrayList<Menu>()
     fun order() {
+
         while (true) {
             showShakeShackMenu()
             if (menuList.isNotEmpty()) showOrderMenu()
-            try{
+            try {
                 val selectMenu = readln().toInt()
                 when (selectMenu) {
                     1 -> {
@@ -23,7 +32,6 @@ class ShackBurger {
                                         "ShackBurger   | ₩ 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거"
                                     )
                                 addMenu(burger)
-
                             }
 
                             2 -> {
@@ -231,34 +239,65 @@ class ShackBurger {
                         else -> println("잘못된 번호를 입력했어요 다시 입력해주세요.")
                     }
 
-                    5 -> {
+                    5 -> if (menuList.isNullOrEmpty()) {
+                        continue
+                    } else {        //주문하기
+
                         while (true) {
-                            println("아래와 같이 주문 하시겠습니까?")
-                            println("[ Orders ]")
-                            for (i in 0 until menuList.size) {
-                                println(menuList[i].description)
-                            }
-                            println("[ Total ]")
+                            val current = LocalDateTime.now()
+                            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                            val formatted = current.format(formatter)
                             var total = 0
                             for (i in 0 until menuList.size) {
                                 total += menuList[i].price
                             }
-                            println("₩ ${(total / 1000.0)}")
-                            println("1. 주문      2. 메뉴판")
+
+                            GlobalScope.launch {
+                                for (i in 3 downTo 0) {
+                                    println("아래와 같이 주문 하시겠습니까? (현재 주문 대기수:$i)")
+                                    for (i in 0 until menuList.size) {
+                                        println(menuList[i].description)
+                                    }
+                                    println("[ Total ]")
+
+                                    println("₩ ${(total / 1000.0)}")
+                                    println("1. 주문      2. 메뉴판")
+                                    delay(3000)
+                                    if (menuList.isNullOrEmpty()) break //주문완료하면 종료
+                                }
+                            }
+
+
+                            val money = 10000
                             val input = readln().toInt()
+                            val time = formatted.substring(11,16).split(":").joinToString("").toInt() //시간 23시10분 -> 2310
 
                             when (input) {
-                                1 -> {
-                                        println("잔액 부족으로 주문할 수 없습니다.")
+                                1 ->if(time in 2310..2320){    //23시10분부터 23시20분까지 결제 불가
+                                    println("현재 시각은 오후${formatted.substring(11,13)}시 ${formatted.substring(14,16)}분입니다.")
+                                    println("은행 점검 시간은 오후11시 10분 ~ 오후 11시 20분이므로 결제할 수 없습니다.")
+                                    runBlocking { launch { delay(5000) } }
+                                }else{ //23시 10분 ~ 23시 20분 사이가 아니면 money와 total을 비교해서 결제가능하면 결제
+                                    if (money < total) {
+                                        println("현재 잔액은 ${money / 1000.0}₩ 으로 ${(total - money) / 1000.0}₩이 부족해서 주문할 수 없습니다.")
+                                        break
+                                    } else {
+                                        println("결제를 완료했습니다. ($formatted) ")
+                                        menuList.clear() //결제완료하면 장바구니 비움
+                                        break
+                                    }
                                 }
 
                                 2 -> break
                                 else -> println("잘못된 번호를 입력했어요 다시 입력해주세요.")
                             }
                         }
+                        runBlocking { launch { delay(3000) } } //3초 후 다른작업
+                        continue
                     }
 
-                    6 -> {
+                    6 -> if (menuList.isNullOrEmpty()) continue
+                    else {  // 주문취소
                         menuList.clear()
                         println("주문이 취소 되었습니다.")
                     }
@@ -267,18 +306,17 @@ class ShackBurger {
                         println("프로그램 종료")
                         break
                     }
-
                     else -> println("잘못된 번호를 입력했어요 다시 입력해주세요.")
-
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 println("숫자를 입력 해주세요")
                 continue
             }
-    }
+        }
+
     }
 
-    private fun addMenu(menu: Menu) {
+    private fun addMenu(menu: Menu) {  //장바구니 추가
         println(menu.description)
         println("위 메뉴를 장바구니에 추가하시겠습니까?")
         println("1. 확인      2. 취소")
@@ -308,7 +346,8 @@ private fun showShakeShackMenu() {
     println("0. 종료            | 프로그램 종료")
 
 }
-private fun showOrderMenu(){
+
+private fun showOrderMenu() {
     println(" [ ORDER MENU ] ")
     println("5. Order   | 장바구니를 확인 후 주문합니다.")
     println("6. Cancel  | 진행중인 주문을 취소합니다.")
