@@ -62,7 +62,7 @@ class MyKiosk private constructor(){
                         "o" -> {
                             //5. 주문하기 화면
                             val isOrderComplete = orderScreen.run()
-                            if(isOrderComplete) break@mainLoop //6. 주문 완료 화면
+                            if(isOrderComplete == "true") break@mainLoop //6. 주문 완료 화면
                         }
                         "b" -> continue@takeOutLoop //1. 먹고가기/포장하기 화면
                         "q" -> continue@firstLoop //0. 첫 화면

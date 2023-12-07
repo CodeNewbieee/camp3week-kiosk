@@ -3,12 +3,12 @@ package com.example.kiosk.screen
 import com.example.kiosk.MyKiosk
 import com.example.kiosk.menu.MyMenu
 
-class MainScreen() {
-    fun run():String{
+class MainScreen() : Screen() {
+    override fun run():String{
         return getInput()
     }
 
-    private fun getInput():String{
+   override fun getInput():String{
         var possibleInputs = arrayOf("c", "o", "b", "q")
         for (i in 1..MyKiosk.myMenu.myMenuCollections.size)
             possibleInputs += i.toString()
@@ -22,7 +22,7 @@ class MainScreen() {
         }
         return input
     }
-    private fun printScreen(){
+    override fun printScreen(){
         println("[메인 화면]")
         println("주문할 메뉴의 카테고리를 선택하세요.")
         MyKiosk.myMenu.printMyMenuCollections()

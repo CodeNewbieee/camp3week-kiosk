@@ -2,18 +2,18 @@ package com.example.kiosk.screen
 
 import com.example.kiosk.MyKiosk
 
-class OrderScreen {
+class OrderScreen : Screen(){
     var isShoppingCartEmpty = true
-    fun run():Boolean{
+    override fun run():String{
         isShoppingCartEmpty = MyKiosk.shoppingCart.isEmpty()
 
         val input = getInput()
-        if(input == "b") return false
-        if(input == "p") return true
-        return false //error
+        if(input == "b") return "false"
+        if(input == "p") return "true"
+        return ""
     }
 
-    private fun getInput():String{
+    override fun getInput():String{
         var possibleInputs = arrayOf("b")
         if(!isShoppingCartEmpty) possibleInputs += "p"
 
@@ -26,7 +26,7 @@ class OrderScreen {
         }
         return input
     }
-    private fun printScreen(){
+    override fun printScreen(){
         println("[주문하기 화면]")
         println("-----${if(MyKiosk.isTakeOut)"포장하기" else "먹고 가기"}")
         if(isShoppingCartEmpty) println("장바구니가 비었습니다.")

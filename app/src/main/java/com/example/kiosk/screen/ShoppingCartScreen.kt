@@ -2,20 +2,20 @@ package com.example.kiosk.screen
 
 import com.example.kiosk.MyKiosk
 
-class ShoppingCartScreen {
+class ShoppingCartScreen: Screen() {
 
     var isShoppingCartEmpty = true
     val deleteFromShoppingCart = DeleteFromShoppingCart()
-    fun run(){
+    override fun run():String{
         var input = ""
         while(true) {
             isShoppingCartEmpty = MyKiosk.shoppingCart.isEmpty()
             input = getInput()
-            if(input == "b") return
+            if(input == "b") return ""
             else if(input == "d") deleteFromShoppingCart.run()
         }
     }
-    private fun getInput():String{
+    override fun getInput():String{
         var possibleInputs = arrayOf("b")
         if(!isShoppingCartEmpty) possibleInputs += "d"
 
@@ -28,7 +28,7 @@ class ShoppingCartScreen {
         }
         return input
     }
-    private fun printScreen(){
+    override fun printScreen(){
         println("[장바구니 화면]")
         if(isShoppingCartEmpty) println("장바구니가 비었습니다.")
         else MyKiosk.shoppingCart.printMenuItems()
@@ -43,14 +43,15 @@ class ShoppingCartScreen {
         println("-----가격 총 합: ${costSum}")
     }
 
-    class DeleteFromShoppingCart() {
-        fun run() {
+    class DeleteFromShoppingCart() : Screen(){
+        override fun run():String {
             val input = getInput()
             MyKiosk.shoppingCart.removeMenuItemAt(input.toInt() - 1)
             println("선택한 항목이 삭제되었습니다.")
+            return ""
         }
 
-        private fun getInput(): String {
+        override fun getInput(): String {
             var possibleInputs = arrayOf<String>()
             for (i in 1..MyKiosk.shoppingCart.getSize()) possibleInputs += i.toString()
 
@@ -64,7 +65,7 @@ class ShoppingCartScreen {
             return input
         }
 
-        private fun printScreen() {
+        override fun printScreen() {
             println("[장바구니에서 항목 삭제하기]")
             println("삭제할 항목의 번호를 입력하세요.")
             print("->")

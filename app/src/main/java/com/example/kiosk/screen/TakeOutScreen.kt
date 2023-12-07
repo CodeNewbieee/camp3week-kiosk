@@ -1,12 +1,11 @@
 package com.example.kiosk.screen
 
-class TakeOutScreen {
-
-    fun run():String{
+class TakeOutScreen :Screen() {
+    override fun run():String{
         return getInput()
     }
 
-    private fun getInput():String{
+   override fun getInput():String{
         val possibleInputs = listOf("1", "2", "q")
         var input = ""
         while(true){
@@ -18,7 +17,7 @@ class TakeOutScreen {
         return input
     }
 
-    private fun printScreen(){
+   override fun printScreen(){
         println("[먹고 가기/포장하기 화면]")
         println("1. 먹고 가기")
         println("2. 포장하기")

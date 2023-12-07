@@ -6,9 +6,10 @@ import com.example.kiosk.menu.MenuItemCollection
 import com.example.kiosk.menu.MenuItem
 import java.nio.file.WatchEvent.Kind
 
-class SelectMenuScreen {
+class SelectMenuScreen: Screen() {
     var menuItemCollection: MenuItemCollection? = null
 
+    override fun run(): String {return ""}
     fun run(menuResult:String){
         menuItemCollection =  MyKiosk.myMenu.myMenuCollections[menuResult.toInt()-1]
 
@@ -23,7 +24,7 @@ class SelectMenuScreen {
         }
     }
 
-    private fun getInput():String{
+    override fun getInput():String{
         var possibleInputs = arrayOf("b")
         for(i in 1..menuItemCollection!!.getSize()) possibleInputs += i.toString()
 
@@ -37,7 +38,7 @@ class SelectMenuScreen {
         return input
     }
 
-    private fun printScreen(){
+    override fun printScreen(){
         println("[${menuItemCollection!!.collectionName} 메뉴 선택 화면]")
         println("주문할 메뉴를 선택하세요.")
         menuItemCollection!!.printMenuItems()
