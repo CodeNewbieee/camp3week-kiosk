@@ -2,60 +2,25 @@ package com.example.kioskapplication
 
 class Menu() {
 
-    var i = 1
-
-    val mainMenuList: Array<Array<String>> = arrayOf(
-        arrayOf("Burgers", "앵거스 비프 통살을 다져만든 버거"),
-        arrayOf("Forzen Custard", "매장에서 신선하게 만드는 아이스크림"),
-        arrayOf("Drinks", "매장에서 직접 만드는 음료"),
-        arrayOf("Beer", " 뉴욕 브루클린 브루어리에서 양조한 맥주")
-    )
-
-    val burgerMenuList: Array<Array<String>> = arrayOf(
-        arrayOf("Shackburger", "6.9", "토마토, 양상추, 쉑소스가 토핑된 치즈버거"),
-        arrayOf("SmokeShack", "8.9", "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"),
-        arrayOf("Shroom Burger", "9.4", "몬스터 치즈와 체다 치즈로 속을 채운 베지테리안 버거"),
-        arrayOf("Cheeseburger", "6.9", "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"),
-        arrayOf("Hamburger", "5.4", "비프패티를 기반으로 야채가 들어간 기본버거")
-    )
     fun mainMenu() {
         println("SHAKESHACK BURGER 에 오신걸 환영합니다.")
         println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.")
         println("")
         println("[SHAKESHACK MENU]")
-//        println("1. Burgers         | 앵거스 비프 통살을 다져만든 버거")
-//        println("2. Forzen Custard  | 매장에서 신선하게 만드는 아이스크림")
-//        println("3. Drinks          | 매장에서 직접 만드는 음료")
-//        println("4. Beer            | 뉴욕 브루클린 브루어리에서 양조한 맥주")
-
-        for (array in mainMenuList) {
-            print("$i. ")
-            for (String in array) {
-                print("$String |  ")
-            }
-            println()
-            i+=1
-        }
+        println("1. Burgers         | 앵거스 비프 통살을 다져만든 버거")
+        println("2. Forzen Custard  | 매장에서 신선하게 만드는 아이스크림")
+        println("3. Drinks          | 매장에서 직접 만드는 음료")
+        println("4. Beer            | 뉴욕 브루클린 브루어리에서 양조한 맥주")
         println("0. Exit | 프로그램 종료")
     }
 
     fun burgerMenu() {
         println("[Burgers MENU]")
-//        println("1. Shackburger   | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거")
-//        println("2. SmokeShack    | W 8.9 | 베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거")
-//        println("3. Shroom Burger | W 9.4 | 몬스터 치즈와 체다 치즈로 속을 채운 베지테리안 버거")
-//        println("4. Cheeseburger  | W 6.9 | 포테이토 번과 비프패티, 치즈가 토핑된 치즈버거")
-//        println("5. Hamburger     | W 5.4 | 비프패티를 기반으로 야채가 들어간 기본버거")
-
-        for (array in burgerMenuList) {
-            print("$i. ")
-            for (String in array) {
-                print("$String |  ")
-            }
-            println()
-            i+=1
-        }
-
+        println("1. Shackburger   | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거")
+        println("2. SmokeShack    | W 8.9 | 베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거")
+        println("3. Shroom Burger | W 9.4 | 몬스터 치즈와 체다 치즈로 속을 채운 베지테리안 버거")
+        println("4. Cheeseburger  | W 6.9 | 포테이토 번과 비프패티, 치즈가 토핑된 치즈버거")
+        println("5. Hamburger     | W 5.4 | 비프패티를 기반으로 야채가 들어간 기본버거")
         println("0. Back          | 뒤로가기")
     }
 
@@ -89,15 +54,5 @@ class Menu() {
         println("0. Back          | 뒤로가기")
     }
 
-    fun orderMenu() {
-        println("[ORDER MENU]")
-        println("5. Order  | 장바구니를 확인 후 주문합니다.")
-        println("6. Cancel | 진행중인 주문을 취소합니다.")
-    }
 
-    fun orderCheck() {
-        println("아래와 같이 주문하시겠습니까?")
-        println("")
-        println("[ ORDERS ]")
-    }
 }
