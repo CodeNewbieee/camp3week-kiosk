@@ -72,7 +72,7 @@ class MyKiosk private constructor(){
                 }
                 //6. 주문 완료 화면
                 orderCompleteScreen.run()
-                break@firstLoop
+                continue@firstLoop
             }
         }
 

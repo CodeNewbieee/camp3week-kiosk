@@ -8,9 +8,7 @@ import java.nio.file.WatchEvent.Kind
 
 class SelectMenuScreen: Screen() {
     var menuItemCollection: MenuItemCollection? = null
-
-    override fun run(): String {return ""}
-    fun run(menuResult:String){
+    override fun run(menuResult:String){
         menuItemCollection =  MyKiosk.myMenu.myMenuCollections[menuResult.toInt()-1]
 
         while(true){
