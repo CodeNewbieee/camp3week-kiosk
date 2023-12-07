@@ -15,5 +15,6 @@ class FirstScreen {
     private fun printScreen(){
         println("[첫 화면]")
         println("주문을 시작하려면 아무 키나 입력하세요...")
+        print("->")
     }
 }

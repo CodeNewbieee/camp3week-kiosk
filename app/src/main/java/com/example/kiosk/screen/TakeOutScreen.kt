@@ -22,7 +22,7 @@ class TakeOutScreen {
         println("[먹고 가기/포장하기 화면]")
         println("1. 먹고 가기")
         println("2. 포장하기")
-        println("")
         println("q. 주문 종료 - 주문을 종료하고 첫 화면으로 돌아갑니다.")
+        print("->")
     }
 }

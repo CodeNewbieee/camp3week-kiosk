@@ -17,8 +17,8 @@ class SelectMenuScreen {
             if(input == "b") return
 
             //선택한 메뉴 장바구니에 추가
-            val selectedMenuItem = menuItemCollection!!.menuItemList[input.toInt()-1]
-            MyKiosk.shoppingCart.menuItemList += selectedMenuItem
+            val selectedMenuItem = menuItemCollection!!.getMenuItemAt(input.toInt()-1)
+            MyKiosk.shoppingCart.addMenuItem(selectedMenuItem)
             println("장바구니에 ${selectedMenuItem.name}이 추가되었습니다.")
         }
     }
@@ -39,8 +39,9 @@ class SelectMenuScreen {
 
     private fun printScreen(){
         println("[${menuItemCollection!!.collectionName} 메뉴 선택 화면]")
+        println("주문할 메뉴를 선택하세요.")
         menuItemCollection!!.printMenuItems()
-        println("")
         println("b: 뒤로 가기 - 메인 화면으로 돌아갑니다.")
+        print("->")
     }
 }

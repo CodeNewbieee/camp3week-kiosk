@@ -44,6 +44,9 @@ class MyKiosk private constructor(){
 
             //1. 먹고 가기/포장하기 화면
             takeOutLoop@ while(true) {
+                //장바구니 초기화
+                shoppingCart.clearMenuItemList()
+
                 val takeOutResult = takeOutScreen.run()
                 when(takeOutResult) {
                     "1" -> isTakeOut = false
@@ -69,6 +72,7 @@ class MyKiosk private constructor(){
                 }
                 //6. 주문 완료 화면
                 orderCompleteScreen.run()
+                break@firstLoop
             }
         }
 
