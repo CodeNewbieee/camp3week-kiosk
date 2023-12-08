@@ -1,4 +1,4 @@
-package com.example.kiosk.screen
+package com.example.kiosk
 
 class PaymentManager {
     private var balance = 0

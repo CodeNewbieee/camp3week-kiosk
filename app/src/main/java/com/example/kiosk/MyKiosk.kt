@@ -7,7 +7,7 @@ import com.example.kiosk.screen.MainScreen
 import com.example.kiosk.screen.OrderCompleteScreen
 import com.example.kiosk.screen.OrderPaymentScreen
 import com.example.kiosk.screen.OrderScreen
-import com.example.kiosk.screen.PaymentManager
+import com.example.kiosk.PaymentManager
 import com.example.kiosk.screen.SelectMenuScreen
 import com.example.kiosk.screen.ShoppingCartScreen
 import com.example.kiosk.screen.TakeOutScreen
