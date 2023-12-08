@@ -5,6 +5,7 @@ import com.example.kiosk.MyKiosk
 class OrderCompleteScreen : Screen() {
     override fun run():String{
         printScreen()
+        MyKiosk.orderCountManager.addOrderCount()
         return ""
     }
 
