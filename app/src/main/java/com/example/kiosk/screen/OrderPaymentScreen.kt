@@ -14,10 +14,13 @@ class OrderPaymentScreen : Screen() {
         while(balance < costSum) {
             val money = getInput()
             balance = MyKiosk.paymentManager.deposit(money.toInt())
+            MyKiosk.taskDelayManager.delayTask3seconds("입금")
             println("현재 잔고는 ${balance}원 입니다.")
         }
-        println("결제가 진행중입니다...")
-        if(MyKiosk.paymentManager.withDraw(costSum)) return "true"
+        if(MyKiosk.paymentManager.withDraw(costSum)){
+            MyKiosk.taskDelayManager.delayTask3seconds("출금")
+            return "true"
+        }
         return "false"
     }
 

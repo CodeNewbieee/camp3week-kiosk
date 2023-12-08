@@ -6,7 +6,7 @@ class DeleteFromShoppingCart() : Screen() {
     override fun run(): String {
         val input = getInput()
         MyKiosk.shoppingCart.removeMenuItemAt(input.toInt() - 1)
-        println("선택한 항목이 삭제되었습니다.")
+        MyKiosk.taskDelayManager.delayTask3seconds("장바구니에서 항목 삭제")
         return ""
     }
 

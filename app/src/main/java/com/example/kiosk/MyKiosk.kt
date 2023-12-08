@@ -37,6 +37,7 @@ class MyKiosk private constructor(){
         val myMenu = MyMenu()
         val shoppingCart = MenuItemCollection()
         val paymentManager = PaymentManager()
+        val taskDelayManager = TaskDelayManager()
         var isTakeOut:Boolean = false
     }
 

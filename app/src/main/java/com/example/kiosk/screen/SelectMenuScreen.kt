@@ -17,8 +17,10 @@ class SelectMenuScreen: Screen() {
 
             //선택한 메뉴 장바구니에 추가
             val selectedMenuItem = menuItemCollection!!.getMenuItemAt(input.toInt()-1)
+            println("선택한 메뉴는 ${selectedMenuItem.name} 입니다.")
+
             MyKiosk.shoppingCart.addMenuItem(selectedMenuItem)
-            println("장바구니에 ${selectedMenuItem.name}이 추가되었습니다.")
+            MyKiosk.taskDelayManager.delayTask3seconds("장바구니에 담기")
         }
     }
 
