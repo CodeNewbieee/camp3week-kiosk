@@ -38,6 +38,7 @@ class MyKiosk private constructor(){
         val shoppingCart = MenuItemCollection()
         val paymentManager = PaymentManager()
         val taskDelayManager = TaskDelayManager()
+        val dateTimeManager = DateTimeManager()
         var isTakeOut:Boolean = false
     }
 
@@ -73,7 +74,7 @@ class MyKiosk private constructor(){
                                     //주문 결제 화면
                                     val orderPaymentResult = orderPaymentScreen.run()
                                     if(orderPaymentResult == "true") break@mainLoop //6. 주문 완료 화면
-                                    else continue@mainLoop //2. 메인 화면 (결제 실패, not reached)
+                                    else continue@mainLoop //2. 메인 화면 (은행 점검 시간으로 결제 실패)
                                 }
                             }
                         }
